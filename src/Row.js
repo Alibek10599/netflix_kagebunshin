@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import "./Row.css"
 import requests from './requests';
 
 
@@ -19,15 +20,17 @@ function Row ({title, fetchURL} ){
         fetchData();
   }, [fetchURL]);
   console.table(movies);
-  const card = movies.map( movie => {
-          return (<img src={`${base_url}${movie.poster_path}`} alt={movie.name}/>)
-      });
   return (<div className="row">
         <h2>{title}</h2>
-                <div className="row_posters">
-                    {card}
-                </div>
-            </div>)
+     <div className="row_posters">
+      { movies.map( movie => (
+      <img className="row_poster"
+           src={`${base_url}${movie.poster_path}`}
+           alt={movie.name}
+      />
+      ))}
+     </div>
+  </div>);
 }
 
 export default Row;
