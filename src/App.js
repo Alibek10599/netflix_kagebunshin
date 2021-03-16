@@ -2,13 +2,16 @@
 import './App.css';
 import Row from './Row';
 import requests from './requests';
+import Banner from "./Banner";
 
 function App() {
 
   return (
     <div className="App">
           <h1>Hi niggaz</h1>
-         
+        {/* Navbar */}
+        {/* Banner */}
+            <Banner />
           <Row title="Trending" fetchURL = {requests.fetchTrending} isLargeRow={true}/>
           <Row title="Top Rated" fetchURL = {requests.fetchTopRated}/>
           <Row title="Western" fetchURL = {requests.fetchWestern}/>
