@@ -1,31 +1,33 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from './axios'
-import requests from "./requests";
+import requests from './requests'
+import './Banner.css'
 
-function Banner (){
-    const base_url = "http://image.tmdb.org/t/p/original";
-    const[movie, setMovie] = useState([]);
+const posterBaseUrl = "http://image.tmdb.org/t/p/original/"
 
-    useEffect(()=>{
-        async function fetchData(){
-            const request = await axios.get(requests.fetchOriginals)
-            setMovie(request.data.result[
-                Math.floor(Math.random()*request.data.result.length)
+function Banner() {
+    const [movie, setMovie] = useState([])
+
+    useEffect(() => {
+        async function fetchData() {
+            const req = await axios.get(requests.fetchNetflixOriginals)
+            setMovie(req.data.results[
+               Math.floor(Math.random() * req.data.results.length - 1)
                 ])
-            return request;
+            return req
         }
         fetchData()
-    }, []);
-    console.log(movie);
+    }, [])
 
-    function truncate(str, n){
+    function truncate(str, n) {
         return str?.length > n ? str.substr(0, n - 1) + "..." : str;
     }
-    return(
-        <header className="banner"
+
+    return (
+        <header className='banner'
                 style={{
                     backgroundSize: "cover",
-                    backgroundImage: `url("${base_url}${movie?.backdrop_path}")`,
+                    backgroundImage: `url("${posterBaseUrl}${movie?.backdrop_path}")`,
                     backgroundPosition: "center center"
                 }}
         >
@@ -46,7 +48,6 @@ function Banner (){
             <div className="banner--fadeBottom" />
         </header>
     )
-
 }
 
-export default Banner;
+export default Banner
